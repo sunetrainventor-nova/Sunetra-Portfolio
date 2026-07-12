@@ -1,0 +1,150 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+    background:linear-gradient(135deg,#4facfe,#00f2fe);
+}
+
+.calculator{
+    background:rgba(255,255,255,0.15);
+    backdrop-filter:blur(15px);
+    -webkit-backdrop-filter:blur(15px);
+
+    border:1px solid rgba(255,255,255,0.2);
+
+    padding:20px;
+    border-radius:20px;
+    width:340px;
+
+    box-shadow:0 10px 30px rgba(0,0,0,0.25);
+}
+
+#themeToggle{
+    width:100%;
+    height:45px;
+    margin-bottom:15px;
+    border:none;
+    border-radius:10px;
+    background:#555;
+    color:white;
+    font-size:1rem;
+    cursor:pointer;
+}
+
+#display{
+    width:100%;
+    height:70px;
+    border:none;
+    outline:none;
+    border-radius:12px;
+    margin-bottom:20px;
+    padding:15px;
+    font-size:2rem;
+    text-align:right;
+    background:#111;
+    color:#fff;
+}
+
+.buttons{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:12px;
+}
+
+button{
+    height:65px;
+    border:none;
+    border-radius:12px;
+    font-size:1.3rem;
+    cursor:pointer;
+    background:#444;
+    color:white;
+    transition:0.2s;
+}
+
+button:hover{
+    background:#666;
+}
+
+button:active{
+    transform:scale(0.95);
+}
+
+.operator{
+    background:#ff9500;
+}
+
+.operator:hover{
+    background:#ffb347;
+}
+
+.equal{
+    grid-column:span 2;
+    background:#28a745;
+}
+
+.equal:hover{
+    background:#3dd15d;
+}
+.calculator.light{
+    background:#f4f4f4;
+}
+
+.calculator.light #display{
+    background:white;
+    color:black;
+}
+
+.calculator.light button{
+    background:#dddddd;
+    color:black;
+}
+
+.calculator.light .operator{
+    background:#ff9500;
+    color:white;
+}
+
+.calculator.light .equal{
+    background:#28a745;
+    color:white;
+}
+@media (max-width: 480px){
+
+    .calculator{
+        width:95%;
+        padding:15px;
+    }
+
+    #display{
+        height:60px;
+        font-size:1.6rem;
+    }
+
+    button{
+        height:55px;
+        font-size:1.1rem;
+    }
+
+}
+h1{
+    position:absolute;
+    top:40px;
+    color:white;
+    font-size:2rem;
+}
+
+footer{
+    position:absolute;
+    bottom:20px;
+    color:white;
+    font-size:1rem;
+}
