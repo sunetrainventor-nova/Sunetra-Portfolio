@@ -1,53 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modern Calculator</title>
+
+    <title>Premium Calculator</title>
 
     <link rel="stylesheet" href="style.css">
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
 </head>
+
 <body>
-<h1>Modern Calculator</h1>
-<footer>
-    Made with ❤️ by Sunetra
-</footer>
 
-<div class="calculator">
+<div class="background-animation">
 
-    <button id="themeToggle">🌙</button>
+    <span></span>
+    <span></span>
+    <span></span>
 
-    <input type="text" id="display" readonly>
+</div>
+<div class="mouse-glow"></div>
+<div class="container">
 
-    <div class="buttons">
+    <!-- Calculator -->
 
-        <button class="operator">AC</button>
-        <button class="operator">DEL</button>
-        <button class="operator">%</button>
-        <button class="operator">/</button>
+    <div class="calculator">
 
-        <button>7</button>
-        <button>8</button>
-        <button>9</button>
-        <button class="operator">*</button>
+        <!-- Top Bar -->
 
-        <button>4</button>
-        <button>5</button>
-        <button>6</button>
-        <button class="operator">-</button>
+        <div class="top-bar">
 
-        <button>1</button>
-        <button>2</button>
-        <button>3</button>
-        <button class="operator">+</button>
+            <h2>Calculator</h2>
 
-        <button>0</button>
-        <button>.</button>
-        <button class="equal">=</button>
+            <div class="icons">
+
+                <!-- History -->
+
+               <button id="historyBtn"
+        class="icon-btn">
+
+    <span>↶</span>
+
+</button>
+
+                <!-- Theme -->
+<button id="themeBtn"
+        class="icon-btn">
+
+    <span>☾</span>
+
+</button>
+
+            </div>
+
+        </div>
+
+        <!-- Display -->
+
+        <div class="display">
+
+            <input
+                type="text"
+                id="display"
+                readonly
+                placeholder="0">
+
+        </div>
+
+        <!-- Buttons -->
+
+        <div class="buttons">
+
+            <button class="operator">AC</button>
+            <button class="operator">DEL</button>
+            <button class="operator">%</button>
+            <button class="operator">÷</button>
+
+            <button>7</button>
+            <button>8</button>
+            <button>9</button>
+            <button class="operator">×</button>
+
+            <button>4</button>
+            <button>5</button>
+            <button>6</button>
+            <button class="operator">-</button>
+
+            <button>1</button>
+            <button>2</button>
+            <button>3</button>
+            <button class="operator">+</button>
+
+            <button>+/-</button>
+            <button>0</button>
+            <button>.</button>
+            <button class="equal">=</button>
+
+        </div>
 
     </div>
 
 </div>
-    <script src="script.js"></script>
+
+<!-- History Drawer -->
+
+<div id="historyPanel"
+     class="history-panel">
+
+    <div class="history-header">
+
+        <h3>History</h3>
+
+        <button id="clearHistory">
+
+    ×
+
+</button>
+
+    </div>
+
+    <div id="historyList">
+
+    </div>
+
+</div>
+
+<!-- Click Sound -->
+
+<audio id="clickSound">
+
+    <source src="click.mp3" type="audio/mpeg">
+
+</audio>
+
+<script src="script.js"></script>
+
 </body>
+
 </html>

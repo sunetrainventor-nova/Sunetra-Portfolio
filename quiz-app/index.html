@@ -3,57 +3,326 @@
 
 <head>
 
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Quiz App</title>
+<title>Quiz Master Premium</title>
 
-    <link rel="stylesheet"
-          href="style.css">
+<link rel="stylesheet" href="style.css">
 
 </head>
 
+
 <body>
+
+
+<div class="background-animation"></div>
+
 
 <div class="container">
 
-    <h1>Quiz App</h1>
 
-    <div class="quiz-box">
-        <button id="start-btn">Start Quiz</button>
-        <div class="progress-bar">
-    <div id="progress-fill"></div>
+<!-- HEADER -->
+
+<header>
+
+<img src="images/logo.jpg" class="logo" alt="Quiz Logo">
+
+<h1>🔥 Quiz Master</h1>
+
+<p>Test Your Knowledge</p>
+
+</header>
+
+
+
+<!-- PROFILE CARD -->
+
+<div class="profile-card">
+
+<h2>🏆 Player Profile</h2>
+
+<div class="profile-info">
+
+<p>Level:
+<span id="level">1</span>
+</p>
+
+
+<p>XP:
+<span id="xp">0</span>
+</p>
+
+
+<p>
+🪙 Coins:
+<span id="coins">0</span>
+</p>
+
+
 </div>
-<p id="timer">Time Left: 15s</p>
-        <p id="progress"></p>
-        <h2 id="question">
-            Question comes here
-        </h2>
-
-        <div id="answer-buttons">
-
-            <button class="btn">Option 1</button>
-
-            <button class="btn">Option 2</button>
-
-            <button class="btn">Option 3</button>
-
-            <button class="btn">Option 4</button>
-
-        </div>
-
-        <button id="next-btn">
-            Next
-        </button>
-
-    </div>
 
 </div>
+
+
+
+
+<!-- QUIZ BOX -->
+
+<div class="quiz-box">
+
+
+<button id="start-btn">
+🚀 Start Quiz
+</button>
+
+
+
+
+<div class="game-stats">
+
+
+<div>
+❤️
+<span id="lives">3</span>
+</div>
+
+
+<div>
+🔥
+<span id="streak">0</span>
+</div>
+
+
+<div>
+⏳
+<span id="timer">15</span>s
+</div>
+
+
+</div>
+
+
+
+
+
+<div class="progress-bar">
+
+<div id="progress-fill"></div>
+
+</div>
+
+
+<p id="progress">
+Question 1/10
+</p>
+
+
+
+<h2 id="question">
+Question comes here
+</h2>
+
+
+
+
+<div id="answer-buttons">
+
+
+<button class="btn">
+Option 1
+</button>
+
+
+<button class="btn">
+Option 2
+</button>
+
+
+<button class="btn">
+Option 3
+</button>
+
+
+<button class="btn">
+Option 4
+</button>
+
+
+</div>
+
+
+
+
+<div class="action-buttons">
+
+
+<button id="hint-btn">
+💡 Hint
+</button>
+
+
+
+<button id="next-btn">
+Next ➡️
+</button>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+<!-- RESULT -->
+
+<div id="result-box">
+
+
+<h2>
+🎉 Quiz Completed
+</h2>
+
+
+<h1>
+<span id="score">
+0
+</span>
+/
+<span id="total">
+10
+</span>
+</h1>
+
+
+<p id="message"></p>
+
+
+<p>
+Accuracy:
+<span id="accuracy">
+0
+</span>%
+</p>
+
+
+
+<button id="restart-btn">
+
+🔄 Play Again
+
+</button>
+
+
+
+</div>
+
+
+
+
+
+
+<!-- ACHIEVEMENTS -->
+
+<div class="achievement-box">
+
+
+<h2>
+🏅 Achievements
+</h2>
+
+
+<div id="badges">
+
+<p>
+🔒 Quiz Beginner
+</p>
+
+
+<p>
+🔒 Fast Thinker
+</p>
+
+
+<p>
+🔒 Quiz Master
+</p>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+<!-- SHOP -->
+
+<div class="shop-box">
+
+
+<h2>
+🛒 Coin Shop
+</h2>
+
+
+<button>
+Extra Life ❤️
+</button>
+
+
+<button>
+Remove Answer 💡
+</button>
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+<!-- SOUNDS -->
+
+<audio id="clickSound" src="sounds/click.mp3"></audio>
+
+<audio id="correctSound" src="sounds/correct.mp3"></audio>
+
+<audio id="wrongSound" src="sounds/wrong.mp3"></audio>
+
+<audio id="levelSound" src="sounds/level-up.mp3"></audio>
+
+<audio id="victorySound" src="sounds/victory.mp3"></audio>
+
+
+
+
+
 
 <script src="questions.js"></script>
+
 <script src="script.js"></script>
+<audio id="correctSound" src="sounds/correct.mp3"></audio>
+<audio id="wrongSound" src="sounds/wrong.mp3"></audio>
+<audio id="clickSound" src="sounds/click.mp3"></audio>
+<audio id="levelSound" src="sounds/level-up.mp3"></audio>
 
 </body>
 

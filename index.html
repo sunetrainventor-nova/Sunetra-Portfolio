@@ -2,6 +2,10 @@
 <html lang="en">
 
 <head>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sunetra | Portfolio</title>
@@ -15,16 +19,26 @@
         <nav>
             <h1>Sunetra</h1>
 
-          <ul>
+         <ul>
 <li><a href="#home">Home</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#contact">Contact</a></li>
+<li><a href="#about">About</a></li>
+<li><a href="#skills">Skills</a></li>
+<li><a href="#projects">Projects</a></li>
+<li><a href="#demo">Demo</a></li>
+<li><a href="#contact">Contact</a></li>
 </ul>
+
+<button id="theme-toggle">🌙</button>
         </nav>
     </header>
 
     <section id="home" class="hero">
+        <div class="floating-shapes">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+</div>
 
     <h2>Hello, I'm Sunetra 👋</h2>
 
@@ -87,6 +101,9 @@
     <div class="projects-container">
 
        <div class="project-card">
+        <div class="project-image">
+    <img src="images/portfolio.png" alt="Portfolio Website">
+</div>
     <h3>Portfolio Website</h3>
     <p>My personal portfolio built using HTML, CSS, and JavaScript.</p>
     <a href="index.html" target="_blank">
@@ -94,46 +111,85 @@
     </a>
 </div>
 
-       <div class="project-card">
+   <div class="project-card">
+
+    <div class="project-image">
+        <img src="images/calculator.png" alt="Calculator">
+    </div>
+
     <h3>Calculator</h3>
+
     <p>A simple calculator to perform basic arithmetic operations.</p>
+
     <a href="CALCULATOR/index.html" target="_blank">
         <button>View Project</button>
     </a>
+
 </div>
 
 <div class="project-card">
+
+    <div class="project-image">
+        <img src="images/game.png" alt="Ball Bounce Adventure">
+    </div>
+
     <h3>Ball Bounce Adventure</h3>
+
     <p>
         A 2D endless adventure game built using HTML, CSS and JavaScript.
         Includes enemies, coins, levels, boss battles and sound effects.
     </p>
+
     <a href="game/game.html">
         <button>Play Game</button>
     </a>
+
 </div>
 
 <div class="project-card">
+
+    <div class="project-image">
+        <img src="images/todo.png" alt="To-Do App">
+    </div>
+
     <h3>To-Do App</h3>
-    <p>A simple and responsive task management application built using HTML, CSS, and JavaScript. Users can add, complete, and delete tasks.</p>
 
-   <a href="todo-app/index.html" target="_blank">
-    <button>View Project</button>
-</a>
+    <p>
+        A simple and responsive task management application built using HTML, CSS, and JavaScript. Users can add, complete, and delete tasks.
+    </p>
+
+    <a href="todo-app/index.html" target="_blank">
+        <button>View Project</button>
+    </a>
+
 </div>
 
 <div class="project-card">
+
+    <div class="project-image">
+        <img src="images/quiz.png" alt="Quiz App">
+    </div>
+
     <h3>Quiz App</h3>
-    <p>An interactive quiz application featuring random questions, shuffled answers, a timer, progress bar, score tracking, and a responsive interface.</p>
+
+    <p>
+        An interactive quiz application featuring random questions, shuffled answers, a timer, progress bar, score tracking, and a responsive interface.
+    </p>
 
     <a href="quiz-app/index.html" target="_blank">
         <button>View Project</button>
     </a>
-</div>
+
 </div>
 
 <div class="project-card">
+
+    <div class="project-image">
+        <img src="images/weather.png" alt="Weather App">
+    </div>
+
     <h3>Weather App</h3>
+
     <p>
         A live weather application built using HTML, CSS, JavaScript and OpenWeather API. Search any city to view temperature, humidity, wind speed and weather conditions.
     </p>
@@ -141,7 +197,29 @@
     <a href="weather-app/index.html" target="_blank">
         <button>View Project</button>
     </a>
+
 </div>
+</section>
+
+<section id="demo">
+
+    <h2>Project Demos</h2>
+
+    <div class="demo-container">
+
+        <div class="demo-card">
+            <div class="video-box">
+                <span>🎥 Demo Video Coming Soon</span>
+            </div>
+
+            <h3>My Projects</h3>
+            <p>
+                Watch my applications and games in action.
+            </p>
+        </div>
+
+    </div>
+
 </section>
 
 <section id="contact">
@@ -168,6 +246,7 @@
     <p>© 2026 Sunetra. All Rights Reserved.</p>
 
 </footer>
+<script src="script.js"></script>
 </body>
 
 </html>

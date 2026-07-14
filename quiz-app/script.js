@@ -1,259 +1,585 @@
+const correctSound = document.getElementById("correctSound");
+const wrongSound = document.getElementById("wrongSound");
+const clickSound = document.getElementById("clickSound");
+const levelSound = document.getElementById("levelSound");
 
-const timerElement = document.getElementById("timer");
-
-let timer;
-let timeLeft = 15;const progressFill = document.getElementById("progress-fill");
-const startButton = document.getElementById("start-btn");
-const progress = document.getElementById("progress");
 const questionElement = document.getElementById("question");
 const answerButtons = document.getElementById("answer-buttons");
+const startButton = document.getElementById("start-btn");
 const nextButton = document.getElementById("next-btn");
+const timerElement = document.getElementById("timer");
+const progressElement = document.getElementById("progress");
+const progressFill = document.getElementById("progress-fill");
 
+const levelElement = document.getElementById("level");
+const xpElement = document.getElementById("xp");
+const coinsElement = document.getElementById("coins");
+const livesElement = document.getElementById("lives");
+const streakElement = document.getElementById("streak");
+
+const hintButton = document.getElementById("hint-btn");
+
+const resultBox = document.getElementById("result-box");
+const restartButton = document.getElementById("restart-btn");
+
+const scoreElement = document.getElementById("score");
+const totalElement = document.getElementById("total");
+const accuracyElement = document.getElementById("accuracy");
+const messageElement = document.getElementById("message");
+
+
+// GAME DATA
+
+let currentLevel = 1;
 let currentQuestionIndex = 0;
-let score = 0;
+
 let quizQuestions = [];
 
-function startQuiz() {
+let score = 0;
+let xp = 0;
+let coins = 0;
 
-    startButton.style.display = "none";
-    questionElement.style.display = "block";
-    answerButtons.style.display = "block";
-    progress.style.display = "block";
-    progressFill.parentElement.style.display = "block";
+let lives = 3;
+let streak = 0;
+
+let timer;
+let timeLeft = 15;
+
+
+// LOAD SAVED DATA
+
+xp = Number(localStorage.getItem("xp")) || 0;
+coins = Number(localStorage.getItem("coins")) || 0;
+currentLevel = Number(localStorage.getItem("level")) || 1;
+
+
+updateProfile();
+
+
+
+// START QUIZ
+
+function startQuiz(){
+
+    startButton.style.display="none";
+
+    resultBox.style.display="none";
 
     currentQuestionIndex = 0;
+
     score = 0;
 
-    nextButton.innerHTML = "Next";
+    lives = 3;
 
-    quizQuestions = [...questions];
+    streak = 0;
 
-    quizQuestions.sort(() => Math.random() - 0.5);
 
-    quizQuestions = quizQuestions.slice(0, Math.min(10, quizQuestions.length));
+    livesElement.innerHTML = lives;
+    streakElement.innerHTML = streak;
+
+
+    quizQuestions = questions.filter(q =>
+        q.level === currentLevel
+    );
+
+
+    quizQuestions.sort(()=>Math.random()-0.5);
+
 
     showQuestion();
 
 }
 
-function showQuestion() {
+
+
+// SHOW QUESTION
+
+function showQuestion(){
 
     resetState();
 
+
     let currentQuestion = quizQuestions[currentQuestionIndex];
-let shuffledAnswers = [...currentQuestion.answers];
-let percent =
-((currentQuestionIndex) / quizQuestions.length) * 100;
 
-progressFill.style.width = percent + "%";
 
-shuffledAnswers.sort(() => Math.random() - 0.5);
-    progress.innerHTML =
-`Question ${currentQuestionIndex + 1} of ${quizQuestions.length}`;
-    
+    progressElement.innerHTML =
+    `Level ${currentLevel} - Question ${currentQuestionIndex+1}/${quizQuestions.length}`;
+
+
+    let progress =
+    ((currentQuestionIndex)/quizQuestions.length)*100;
+
+
+    progressFill.style.width =
+    progress+"%";
+
+
+
     questionElement.innerHTML =
-        (currentQuestionIndex + 1) + ". " + currentQuestion.question;
+    currentQuestion.question;
 
-   shuffledAnswers.forEach(answer => {
 
-        const button = document.createElement("button");
 
-        button.innerHTML = answer.text;
+    let answers =
+    [...currentQuestion.answers];
+
+
+    answers.sort(()=>Math.random()-0.5);
+
+
+
+    answers.forEach(answer=>{
+
+
+        let button =
+        document.createElement("button");
+
+
+        button.innerHTML =
+        answer.text;
+
 
         button.classList.add("btn");
 
-        if (answer.correct) {
-            button.dataset.correct = "true";
+
+        if(answer.correct){
+
+            button.dataset.correct="true";
+
         }
 
-        button.addEventListener("click", selectAnswer);
+
+        button.onclick =
+        selectAnswer;
+
 
         answerButtons.appendChild(button);
 
+
     });
+
+
     startTimer();
 
 }
 
-function resetState() {
 
-    nextButton.style.display = "none";
 
-    while (answerButtons.firstChild) {
+// RESET
 
-        answerButtons.removeChild(answerButtons.firstChild);
+function resetState(){
+
+    nextButton.style.display="none";
+
+
+    while(answerButtons.firstChild){
+
+        answerButtons.removeChild(
+            answerButtons.firstChild
+        );
 
     }
 
 }
 
-function startTimer() {
+
+
+// TIMER
+
+function startTimer(){
 
     clearInterval(timer);
 
+
     timeLeft = 15;
 
-    timerElement.innerHTML = `Time Left: ${timeLeft}s`;
 
-    timer = setInterval(() => {
+    timerElement.innerHTML =
+    `⏳ ${timeLeft}s`;
+
+
+
+    timer=setInterval(()=>{
+
 
         timeLeft--;
 
-        timerElement.innerHTML = `Time Left: ${timeLeft}s`;
 
-        if (timeLeft <= 0) {
+        timerElement.innerHTML =
+        `⏳ ${timeLeft}s`;
+
+
+
+        if(timeLeft<=0){
 
             clearInterval(timer);
 
-            Array.from(answerButtons.children).forEach(button => {
+            revealAnswer();
 
-                if (button.dataset.correct === "true") {
-
-                    button.style.background = "#4CAF50";
-
-                }
-
-                button.disabled = true;
-
-            });
-
-            nextButton.style.display = "block";
-
-            setTimeout(() => {
-
-                handleNextButton();
-
-            }, 2000);
+            nextButton.style.display="block";
 
         }
 
-    }, 1000);
+
+    },1000);
 
 }
 
-function selectAnswer(e) {
-clearInterval(timer);
-    const selectedButton = e.target;
 
-    const isCorrect = selectedButton.dataset.correct === "true";
 
-    if (isCorrect) {
+// ANSWER SELECT
 
-        selectedButton.style.background = "#4CAF50";
+function selectAnswer(e){
+
+
+    clearInterval(timer);
+
+
+    let selected =
+    e.target;
+
+
+    let correct =
+    selected.dataset.correct==="true";
+
+
+
+    if(correct){
+
+        selected.style.background="#22c55e";
+
+        correctSound.play();
+
         score++;
 
-    } else {
+        xp+=10;
 
-        selectedButton.style.background = "#f44336";
+        coins+=5;
+
+        streak++;
+
+
+    }else{
+
+
+        selected.style.background="#ef4444";
+
+ wrongSound.play();
+
+        lives--;
+
+        streak=0;
+
 
     }
 
-    Array.from(answerButtons.children).forEach(button => {
 
-        if (button.dataset.correct === "true") {
 
-            button.style.background = "#4CAF50";
+    livesElement.innerHTML=lives;
+
+    streakElement.innerHTML=streak;
+
+
+    updateProfile();
+
+
+    disableButtons();
+
+
+    nextButton.style.display="block";
+
+
+}
+
+
+// DISABLE BUTTONS
+
+function disableButtons(){
+
+    Array.from(answerButtons.children)
+    .forEach(button=>{
+
+        if(button.dataset.correct==="true"){
+
+            button.style.background="#22c55e";
 
         }
 
-        button.disabled = true;
+        button.disabled=true;
 
     });
 
-    nextButton.style.display = "block";
+}
+
+
+
+// SHOW CORRECT ANSWER
+
+function revealAnswer(){
+
+    Array.from(answerButtons.children)
+    .forEach(button=>{
+
+        if(button.dataset.correct==="true"){
+
+            button.style.background="#22c55e";
+
+        }
+
+        button.disabled=true;
+
+    });
 
 }
 
-function showScore() {
-clearInterval(timer);
-timerElement.innerHTML = "";
-    resetState();
 
-    progress.innerHTML = "";
-progressFill.parentElement.style.display = "none";
-    progressFill.style.width = "100%";
 
-    let message = "";
+// NEXT BUTTON
 
-    if (score === quizQuestions.length) {
+nextButton.onclick=function(){
 
-        message = "🏆 Outstanding! Perfect Score!";
-
-    } else if (score >= 8) {
-
-        message = "🎉 Excellent Work!";
-
-    } else if (score >= 6) {
-
-        message = "👍 Good Job!";
-
-    } else if (score >= 4) {
-
-        message = "📚 Keep Practicing!";
-
-    } else {
-
-        message = "💪 Don't Give Up!";
-
-    }
-
-    let accuracy = Math.round((score / quizQuestions.length) * 100);
-
-    questionElement.innerHTML = `
-        <h2>🎉 Quiz Completed!</h2>
-
-        <br>
-
-        <h1>${score} / ${quizQuestions.length}</h1>
-
-        <br>
-
-        <p>${message}</p>
-
-        <br>
-
-        <p>Accuracy : ${accuracy}%</p>
-    `;
-
-    nextButton.innerHTML = "Play Again";
-
-    nextButton.style.display = "block";
-
-}
-function handleNextButton() {
 
     currentQuestionIndex++;
 
-    if (currentQuestionIndex < quizQuestions.length) {
+
+    if(currentQuestionIndex < quizQuestions.length){
+
 
         showQuestion();
 
-    } else {
 
-        showScore();
+    }else{
+
+
+        finishQuiz();
+
 
     }
+
+
+};
+
+
+
+
+// HINT SYSTEM
+
+hintButton.onclick=function(){
+
+
+    let wrongAnswers =
+    Array.from(answerButtons.children)
+    .filter(button=>
+        button.dataset.correct!=="true"
+    );
+
+
+    if(coins>=10 && wrongAnswers.length>1){
+
+
+        coins-=10;
+
+
+        wrongAnswers[0].style.display="none";
+
+
+        updateProfile();
+
+
+    }else{
+
+
+        alert("Need 10 coins for hint 🪙");
+
+
+    }
+
+
+};
+
+
+
+
+// FINISH QUIZ
+
+function finishQuiz(){
+
+
+    clearInterval(timer);
+
+
+    questionElement.style.display="none";
+
+    answerButtons.style.display="none";
+
+    nextButton.style.display="none";
+
+
+
+    resultBox.style.display="block";
+
+
+
+    scoreElement.innerHTML=score;
+
+
+    totalElement.innerHTML=
+    quizQuestions.length;
+
+
+
+    let accuracy =
+    Math.round(
+        (score/quizQuestions.length)*100
+    );
+
+
+    accuracyElement.innerHTML=
+    accuracy;
+
+
+
+    if(score>=15){
+
+        messageElement.innerHTML=
+        "🏆 Amazing! Level Completed";
+
+        unlockLevel();
+
+    }
+    else if(score>=10){
+
+        messageElement.innerHTML=
+        "🔥 Great Performance";
+
+    }
+    else{
+
+        messageElement.innerHTML=
+        "💪 Keep Practicing";
+
+    }
+
+
+
+    saveData();
 
 }
 
-nextButton.addEventListener("click", () => {
 
-    if (currentQuestionIndex < quizQuestions.length) {
 
-        handleNextButton();
 
-    } else {
+// UNLOCK NEXT LEVEL
 
-        startQuiz();
+function unlockLevel(){
+
+
+    if(currentLevel<4){
+
+        currentLevel++;
+
+       levelSound.play();
+
+alert(
+"🎉 New Level Unlocked!"
+);
 
     }
 
-});
 
-questionElement.style.display = "none";
-answerButtons.style.display = "none";
-nextButton.style.display = "none";
-progress.style.display = "none";
-progressFill.parentElement.style.display = "none";
+}
 
-startButton.addEventListener("click", startQuiz);
+
+
+// RESTART
+
+restartButton.onclick=function(){
+
+
+    questionElement.style.display="block";
+
+    answerButtons.style.display="block";
+
+
+    resultBox.style.display="none";
+
+
+    startQuiz();
+
+
+};
+
+
+
+
+// PROFILE UPDATE
+
+function updateProfile(){
+
+
+    levelElement.innerHTML=
+    currentLevel;
+
+
+    xpElement.innerHTML=
+    xp;
+
+
+    coinsElement.innerHTML=
+    coins;
+
+
+}
+
+
+
+
+// SAVE GAME DATA
+
+function saveData(){
+
+
+    localStorage.setItem(
+        "xp",
+        xp
+    );
+
+
+    localStorage.setItem(
+        "coins",
+        coins
+    );
+
+
+    localStorage.setItem(
+        "level",
+        currentLevel
+    );
+
+
+}
+
+
+
+
+
+// START BUTTON
+
+startButton.onclick=function(){
+
+    clickSound.play();
+
+    startQuiz();
+
+};
+
+
+
+
+// INITIAL SETTINGS
+
+questionElement.style.display="block";
+
+answerButtons.style.display="block";
+
+resultBox.style.display="none";

@@ -1,61 +1,197 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weather App</title>
 
-    <link rel="stylesheet" href="style.css">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Premium Weather App</title>
+
+<link rel="stylesheet" href="style.css">
+
 </head>
+
+
 <body>
 
-    <div class="container">
 
-        <h1>Weather App</h1>
+<div class="particles"></div>
 
-        <div class="search-box">
-            <input
-                type="text"
-                id="cityInput"
-                placeholder="Enter city name">
 
-            <button id="searchBtn">
-                Search
-            </button>
-        </div>
+<div class="cloud cloud1"></div>
+<div class="cloud cloud2"></div>
+<div class="cloud cloud3"></div>
 
-        <div class="weather-card">
 
-            <h2 id="cityName">City</h2>
 
-            <img
-                id="weatherIcon"
-                src=""
-                alt="Weather Icon">
+<div class="container">
 
-            <h3 id="temperature">--°C</h3>
 
-            <p id="description">
-                Weather Condition
-            </p>
+    <button id="modeBtn">
+        🌙
+    </button>
 
-            <div class="details">
 
-                <p id="humidity">
-                    Humidity : --
-                </p>
+    <h1>
+        🌤 Weather App
+    </h1>
 
-                <p id="wind">
-                    Wind : --
-                </p>
 
-            </div>
 
-        </div>
+    <div class="search-box">
+
+        <input 
+        id="cityInput"
+        type="text"
+        placeholder="Search city...">
+
+
+        <button id="searchBtn">
+            Search
+        </button>
 
     </div>
 
-    <script src="script.js"></script>
+
+
+
+    <div id="loader">
+        Loading...
+    </div>
+
+
+
+
+    <div class="weather-card">
+
+
+        <h2 id="cityName">
+            City
+        </h2>
+
+
+
+        <img 
+        id="weatherIcon"
+        src=""
+        alt="weather">
+
+
+
+        <h3 id="temperature">
+            --°C
+        </h3>
+
+
+        <p id="description">
+            Weather Condition
+        </p>
+
+
+
+        <div class="info-grid">
+
+
+            <div class="info-card">
+                💧
+                <span id="humidity">
+                Humidity
+                </span>
+            </div>
+
+
+
+            <div class="info-card">
+                🌬️
+                <span id="wind">
+                Wind
+                </span>
+            </div>
+
+
+
+            <div class="info-card">
+                🌡️
+                <span id="feels">
+                Feels Like
+                </span>
+            </div>
+
+
+
+            <div class="info-card">
+                📈
+                <span id="pressure">
+                Pressure
+                </span>
+            </div>
+
+
+
+            <div class="info-card">
+                👁️
+                <span id="visibility">
+                Visibility
+                </span>
+            </div>
+
+
+
+            <div class="info-card">
+                ☁️
+                <span id="clouds">
+                Clouds
+                </span>
+            </div>
+
+
+        </div>
+
+
+
+        <div class="sun">
+
+            🌅
+            <span id="sunrise">
+            Sunrise
+            </span>
+
+
+            🌇
+            <span id="sunset">
+            Sunset
+            </span>
+
+        </div>
+
+
+    </div>
+
+
+
+
+
+    <h2 class="title">
+        5 Day Forecast
+    </h2>
+
+
+
+    <div id="forecast" class="forecast">
+
+    </div>
+
+
+
+</div>
+
+
+
+
+<script src="script.js"></script>
+
 
 </body>
+
 </html>
